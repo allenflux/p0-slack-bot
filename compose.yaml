@@ -14,6 +14,5 @@ services:
     ports:
       - "${PORT:-3000}:3000"
     volumes:
-      - /Users/allenflux/PyCharmProject/temp/backend:/backend:ro
       - ./data:/app/data
-    command: ["sh", "-c", "npm run sync:apis && npm start"]
+    command: ["sh", "scripts/start.sh"]

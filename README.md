@@ -61,7 +61,9 @@ docker compose logs -f p0-slack-curl-bot
 docker compose down
 ```
 
-Compose 会把 backend 项目以只读方式挂载到容器的 `/backend`，并在每次启动时执行 `npm run sync:apis`，所以重启容器即可同步最新 API catalog。
+Compose 默认使用仓库里已提交的 `data/apiCatalog.json`，所以 VPS 上不需要部署 backend。
+
+如果你在某台机器上也有 backend，可以把 backend 挂载到容器的 `/backend`；启动脚本检测到 `/backend/src/routers/workflow.py` 后，会先执行 `npm run sync:apis` 再启动 bot。
 
 ## 同步 backend API
 

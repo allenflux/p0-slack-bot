@@ -1,0 +1,19 @@
+services:
+  p0-slack-curl-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: p0-slack-curl-bot
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      PORT: ${PORT:-3000}
+      BACKEND_ROOT: /backend
+    ports:
+      - "${PORT:-3000}:3000"
+    volumes:
+      - /Users/allenflux/PyCharmProject/temp/backend:/backend:ro
+      - ./data:/app/data
+    command: ["sh", "-c", "npm run sync:apis && npm start"]

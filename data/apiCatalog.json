@@ -1,0 +1,2689 @@
+{
+  "generatedAt": "2026-06-16T08:29:28.781Z",
+  "backendRoot": "/backend",
+  "routeCount": 39,
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/api/public/generate/clothes-swap/images",
+      "name": "generate_clothes_swap",
+      "functionName": "generate_clothes_swap",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "source_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "源图片"
+        },
+        {
+          "name": "method",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "bikini",
+          "description": ""
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID"
+        },
+        {
+          "name": "is_encrypt",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "False",
+          "description": "是否加密"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/generate/face-swap",
+      "name": "generate_face_swap",
+      "functionName": "generate_face_swap",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "source_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "脸部源"
+        },
+        {
+          "name": "target_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "目标图片"
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID, 如果不传则自动生成一个UUID"
+        },
+        {
+          "name": "is_encrypt",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "False",
+          "description": "是否加密"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/generate/face-swap/video",
+      "name": "generate_face_swap_video",
+      "functionName": "generate_face_swap_video",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "source_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "图片，源图片"
+        },
+        {
+          "name": "target_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "视频，目标视频"
+        },
+        {
+          "name": "output_format",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "video",
+          "description": "输出格式: video 或 webp"
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID, 如果不传则自动生成一个UUID"
+        },
+        {
+          "name": "is_encrypt",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "False",
+          "description": "是否加密"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/generate/image2image",
+      "name": "generate_image2image",
+      "functionName": "generate_image2image",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "source_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "源图片"
+        },
+        {
+          "name": "prompt",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "描述图像内容的正向提示字符串"
+        },
+        {
+          "name": "model",
+          "in": "form",
+          "type": "str | None",
+          "required": false,
+          "default": "ponyxlv2",
+          "description": "模型"
+        },
+        {
+          "name": "negative_prompt",
+          "in": "form",
+          "type": "str | None",
+          "required": false,
+          "default": "None",
+          "description": "描述图像内容的负向提示字符串"
+        },
+        {
+          "name": "height",
+          "in": "form",
+          "type": "int | None",
+          "required": false,
+          "default": "None",
+          "description": "生成图像高度"
+        },
+        {
+          "name": "width",
+          "in": "form",
+          "type": "int | None",
+          "required": false,
+          "default": "None",
+          "description": "生成图像宽度"
+        },
+        {
+          "name": "batch_size",
+          "in": "form",
+          "type": "int | None",
+          "required": false,
+          "default": "4",
+          "description": "生成图像张数"
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID, 如果不传则自动生成一个UUID"
+        },
+        {
+          "name": "is_encrypt",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "False",
+          "description": "是否加密"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/generate/kiss/video",
+      "name": "generate_kiss_video",
+      "functionName": "generate_kiss_video",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "first_image",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "第一张图片"
+        },
+        {
+          "name": "end_image",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "第二张图片"
+        },
+        {
+          "name": "output_format",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "video",
+          "description": "输出格式: video 或 webp"
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID"
+        },
+        {
+          "name": "is_encrypt",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "False",
+          "description": "是否加密"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/generate/pose_transfer/video",
+      "name": "generate_pose_transfer_video",
+      "functionName": "generate_pose_transfer_video",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "source_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "图片，源图片"
+        },
+        {
+          "name": "target_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "视频，目标视频"
+        },
+        {
+          "name": "output_format",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "video",
+          "description": "输出格式: video 或 webp"
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID"
+        },
+        {
+          "name": "is_encrypt",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "False",
+          "description": "是否加密"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/generate/tattoos",
+      "name": "generate_tattoos",
+      "functionName": "generate_tattoos",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "source_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "目标图片"
+        },
+        {
+          "name": "target_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "人物图片"
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID, 如果不传则自动生成一个UUID"
+        },
+        {
+          "name": "is_encrypt",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "False",
+          "description": "是否加密"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/generate/text2image",
+      "name": "generate_text2image",
+      "functionName": "generate_text2image",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "prompt",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "描述图像内容的正向提示字符串"
+        },
+        {
+          "name": "model",
+          "in": "form",
+          "type": "str | None",
+          "required": false,
+          "default": "ponyxlv2",
+          "description": "模型"
+        },
+        {
+          "name": "height",
+          "in": "form",
+          "type": "int | None",
+          "required": false,
+          "default": "None",
+          "description": "生成图像高度"
+        },
+        {
+          "name": "width",
+          "in": "form",
+          "type": "int | None",
+          "required": false,
+          "default": "None",
+          "description": "生成图像宽度"
+        },
+        {
+          "name": "batch_size",
+          "in": "form",
+          "type": "int | None",
+          "required": false,
+          "default": "4",
+          "description": "生成图像张数"
+        },
+        {
+          "name": "negative_prompt",
+          "in": "form",
+          "type": "str | None",
+          "required": false,
+          "default": "None",
+          "description": "描述图像内容的负向提示字符串"
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID, 如果不传则自动生成一个UUID"
+        },
+        {
+          "name": "is_encrypt",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "False",
+          "description": "是否加密"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/generate/undress",
+      "name": "generate_undress_video",
+      "functionName": "generate_undress_video",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "source_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "人物图片"
+        },
+        {
+          "name": "method",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "method_2",
+          "description": ""
+        },
+        {
+          "name": "output_format",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "video",
+          "description": ""
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID"
+        },
+        {
+          "name": "is_encrypt",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "False",
+          "description": "是否加密"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/generate/undress/anime",
+      "name": "generate_undress_anime_image",
+      "functionName": "generate_undress_anime_image",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "source_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "人物图片"
+        },
+        {
+          "name": "scene_name",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "场景名称"
+        },
+        {
+          "name": "incoming_prompt",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID"
+        },
+        {
+          "name": "is_encrypt",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "False",
+          "description": "是否加密"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/generate/undress/anime/video",
+      "name": "generate_undress_anime_video",
+      "functionName": "generate_undress_anime_video",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "source_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "人物图片"
+        },
+        {
+          "name": "scene_name",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "场景名称"
+        },
+        {
+          "name": "qwen_incoming_prompt",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "wan_incoming_prompt",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "output_format",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "video",
+          "description": "输出格式: video 或 webp"
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/generate/undress/images",
+      "name": "generate_undress_images",
+      "functionName": "generate_undress_images",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "source_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "人物图片"
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID"
+        },
+        {
+          "name": "is_encrypt",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "False",
+          "description": "是否加密"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/generate/undress/images/male",
+      "name": "generate_undress_images_male",
+      "functionName": "generate_undress_images_male",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "source_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "人物图片"
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID"
+        },
+        {
+          "name": "is_encrypt",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "False",
+          "description": "是否加密"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/generate/videos/scenes",
+      "name": "generate_videos_scenes",
+      "functionName": "generate_videos_scenes",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "source_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "人物图片"
+        },
+        {
+          "name": "scene_name",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "场景名称"
+        },
+        {
+          "name": "incoming_prompt",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "output_format",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "video",
+          "description": "输出格式: video 或 webp"
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID"
+        },
+        {
+          "name": "is_encrypt",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "False",
+          "description": "是否加密"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/generate/videos/scenes/double",
+      "name": "generate_videos_double_scenes",
+      "functionName": "generate_videos_double_scenes",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "source_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "女性图"
+        },
+        {
+          "name": "target_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "男性图"
+        },
+        {
+          "name": "scene_name",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "场景名称"
+        },
+        {
+          "name": "incoming_prompt",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "output_format",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "video",
+          "description": "输出格式: video 或 webp"
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID"
+        },
+        {
+          "name": "is_encrypt",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "False",
+          "description": "是否加密"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/generate/videos/scenes/prompt",
+      "name": "generate_videos_scenes",
+      "functionName": "generate_videos_scenes",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "source_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "人物图片"
+        },
+        {
+          "name": "scene_name",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "场景名称"
+        },
+        {
+          "name": "incoming_prompt",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "output_format",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "video",
+          "description": "输出格式: video 或 webp"
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID"
+        },
+        {
+          "name": "is_encrypt",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "False",
+          "description": "是否加密"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/generate/videos/scenes/qwen",
+      "name": "generate_videos_qwen_scenes",
+      "functionName": "generate_videos_qwen_scenes",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "source_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "原始图"
+        },
+        {
+          "name": "target_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "参考图"
+        },
+        {
+          "name": "scene_name",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "场景名称"
+        },
+        {
+          "name": "incoming_prompt",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/generate/videos/scenes/webp",
+      "name": "generate_videos_scenes_webp",
+      "functionName": "generate_videos_scenes_webp",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "source_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "人物图片"
+        },
+        {
+          "name": "scene_name",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "场景名称"
+        },
+        {
+          "name": "incoming_prompt",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID"
+        },
+        {
+          "name": "is_encrypt",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "False",
+          "description": "是否加密"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/generate/videos/scenes/webp/prompt",
+      "name": "generate_videos_scenes_webp",
+      "functionName": "generate_videos_scenes_webp",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "source_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "人物图片"
+        },
+        {
+          "name": "scene_name",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "场景名称"
+        },
+        {
+          "name": "incoming_prompt",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "标题"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "notify_url"
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID"
+        },
+        {
+          "name": "is_encrypt",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "False",
+          "description": "是否加密"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/orchestrator/generate/images",
+      "name": "文生图",
+      "functionName": "orchestrator_generate_images",
+      "tags": [
+        "public"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "source_path",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "参考图片"
+        },
+        {
+          "name": "method",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "1",
+          "description": "方式"
+        },
+        {
+          "name": "prompt",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "提示词，例如：漂亮长发,苗条高挑"
+        },
+        {
+          "name": "negative_prompt",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "负面提示词"
+        },
+        {
+          "name": "size",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "720X960",
+          "description": "尺寸"
+        },
+        {
+          "name": "batch_count",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "1",
+          "description": "生成套数"
+        },
+        {
+          "name": "batch_size",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "3",
+          "description": "每套出图数"
+        },
+        {
+          "name": "title",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "描述，例如：一个女孩子"
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "style",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "anime",
+          "description": "風格名稱(realisic, anime, wai)"
+        },
+        {
+          "name": "strength",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "0.5",
+          "description": "風格轉換強度(0.5~0.9)"
+        },
+        {
+          "name": "elements",
+          "in": "form",
+          "type": "list",
+          "required": false,
+          "default": "[]",
+          "description": "元素名称, 例如：['樱花树','和风庭院','灯笼','榻榻米房间','温泉池']"
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str | None",
+          "required": false,
+          "default": "None",
+          "description": "通知回调URL"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "hash_key",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "task_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "任务ID, 如果不传则自动生成一个UUID"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/task/retry",
+      "name": "retry_task_by_task_id",
+      "functionName": "retry_task_by_task_id",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "task_id",
+          "in": "query",
+          "type": "str",
+          "required": true,
+          "default": "",
+          "description": "任务 ID"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/task/sync-status",
+      "name": "sync_task_status_by_task_id",
+      "functionName": "sync_task_status_by_task_id",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "task_id",
+          "in": "query",
+          "type": "str",
+          "required": true,
+          "default": "",
+          "description": "任务 ID"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/workflow/bid",
+      "name": "workflow 按 bid 获取任务详情（MySQL）",
+      "functionName": "get_mqtask_by_bid",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "bid",
+          "in": "query",
+          "type": "str",
+          "required": true,
+          "default": "",
+          "description": "业务编号"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/workflow/generate/audio",
+      "name": "generate_audio",
+      "functionName": "generate_audio",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "text",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "内容"
+        },
+        {
+          "name": "spk_id",
+          "in": "form",
+          "type": "str | None",
+          "required": false,
+          "default": "中文女",
+          "description": "声音类型"
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str | None",
+          "required": false,
+          "default": "None",
+          "description": "通知回调URL"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/workflow/generate/audio/list",
+      "name": "get_available_speakers",
+      "functionName": "get_available_speakers",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/workflow/generate/audio/upload",
+      "name": "upload_custom_speaker_prompt",
+      "functionName": "upload_custom_speaker_prompt",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "spk_id",
+          "in": "form",
+          "type": "str",
+          "required": true,
+          "default": "",
+          "description": "音色ID"
+        },
+        {
+          "name": "prompt_text",
+          "in": "form",
+          "type": "str",
+          "required": true,
+          "default": "",
+          "description": "音色提示文本"
+        },
+        {
+          "name": "prompt_audio",
+          "in": "file",
+          "type": "UploadFile",
+          "required": true,
+          "default": "",
+          "description": "音色提示音频（WAV格式，5-30秒）"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/workflow/generate/novel",
+      "name": "generate_novel",
+      "functionName": "generate_novel",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "description",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "剧情描述/故事情节"
+        },
+        {
+          "name": "character_setting",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "人物设定"
+        },
+        {
+          "name": "location_scene",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "地点场景"
+        },
+        {
+          "name": "details",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "细节说明/其他要求"
+        },
+        {
+          "name": "count",
+          "in": "form",
+          "type": "int",
+          "required": false,
+          "default": "4000",
+          "description": "小说字数"
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "fee",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "10",
+          "description": "费用"
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str | None",
+          "required": false,
+          "default": "None",
+          "description": "通知回调URL"
+        },
+        {
+          "name": "is_encrypt",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "False",
+          "description": "是否加密"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/workflow/generate/ttsv2",
+      "name": "ttsv2_generate_audio",
+      "functionName": "ttsv2_generate_audio",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "text",
+          "in": "form",
+          "type": "str",
+          "required": true,
+          "default": "",
+          "description": "内容"
+        },
+        {
+          "name": "spk_id",
+          "in": "form",
+          "type": "str",
+          "required": true,
+          "default": "",
+          "description": "声音类型"
+        },
+        {
+          "name": "use_emo",
+          "in": "form",
+          "type": "bool",
+          "required": false,
+          "default": "",
+          "description": "是否使用情感"
+        },
+        {
+          "name": "emo_type",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "情感类型"
+        },
+        {
+          "name": "emo_text",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "情感文本"
+        },
+        {
+          "name": "emo_alpha",
+          "in": "form",
+          "type": "float",
+          "required": false,
+          "default": "",
+          "description": "情感强度"
+        },
+        {
+          "name": "bid",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "app_id",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "app_id"
+        },
+        {
+          "name": "notify_url",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "通知回调URL"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/workflow/generate/ttsv2/speaker",
+      "name": "ttsv2_speaker",
+      "functionName": "ttsv2_speaker",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "spk_id",
+          "in": "form",
+          "type": "str",
+          "required": true,
+          "default": "",
+          "description": "音色ID，长度4-20字符"
+        },
+        {
+          "name": "spk_name",
+          "in": "form",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "音色名称"
+        },
+        {
+          "name": "audio",
+          "in": "file",
+          "type": "UploadFile",
+          "required": true,
+          "default": "",
+          "description": "音色提示音频（WAV格式，1-30秒）"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/workflow/generate/ttsv2/speakers",
+      "name": "ttsv2_speakers",
+      "functionName": "ttsv2_speakers",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/workflow/query/face-swap",
+      "name": "workflow_query_task",
+      "functionName": "workflow_query_task",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "bid",
+          "in": "query",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "index",
+          "in": "query",
+          "type": "int",
+          "required": false,
+          "default": "0",
+          "description": "如果有多个任务，则返回第几个任务，默认0为第一个，1为第二个，以此类推"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/workflow/query/generate",
+      "name": "workflow_query_task",
+      "functionName": "workflow_query_task",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "bid",
+          "in": "query",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "index",
+          "in": "query",
+          "type": "int",
+          "required": false,
+          "default": "0",
+          "description": "如果有多个任务，则返回第几个任务，默认0为第一个，1为第二个，以此类推"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/workflow/query/novel",
+      "name": "workflow_query_task",
+      "functionName": "workflow_query_task",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "bid",
+          "in": "query",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "index",
+          "in": "query",
+          "type": "int",
+          "required": false,
+          "default": "0",
+          "description": "如果有多个任务，则返回第几个任务，默认0为第一个，1为第二个，以此类推"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/workflow/query/undress",
+      "name": "workflow_query_task",
+      "functionName": "workflow_query_task",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "bid",
+          "in": "query",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "业务编号"
+        },
+        {
+          "name": "index",
+          "in": "query",
+          "type": "int",
+          "required": false,
+          "default": "0",
+          "description": "如果有多个任务，则返回第几个任务，默认0为第一个，1为第二个，以此类推"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/workflow/random_submit",
+      "name": "random_submit",
+      "functionName": "random_submit",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "dir_path",
+          "in": "query",
+          "type": "str",
+          "required": false,
+          "default": "",
+          "description": "存放 workflow.json 的目录"
+        },
+        {
+          "name": "num",
+          "in": "query",
+          "type": "int",
+          "required": false,
+          "default": "",
+          "description": "要提交的任务数量(1-100)"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/workflow/task",
+      "name": "workflow 获取任务详情（MySQL）",
+      "functionName": "get_mqtask_by_task_id",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "task_id",
+          "in": "query",
+          "type": "str",
+          "required": true,
+          "default": "",
+          "description": "任务 ID"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/workflow/task/details",
+      "name": "batch_get_task",
+      "functionName": "batch_get_task",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "ids",
+          "in": "body",
+          "type": "Annotated[\n        list[str],\n        Body(),\n    ]",
+          "required": false,
+          "default": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/workflow/task/list",
+      "name": "get_task_list",
+      "functionName": "get_task_list",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "task_list_str",
+          "in": "query",
+          "type": "str",
+          "required": true,
+          "default": "",
+          "description": "逗号分隔的任务ID列表"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/workflow/task/queue",
+      "name": "get_task_queue",
+      "functionName": "get_task_queue",
+      "tags": [
+        "workflow"
+      ],
+      "file": "src/routers/workflow.py",
+      "params": [
+        {
+          "name": "ids",
+          "in": "body",
+          "type": "Annotated[list, Query(separator",
+          "required": false,
+          "default": "",
+          "description": ""
+        }
+      ]
+    }
+  ]
+}

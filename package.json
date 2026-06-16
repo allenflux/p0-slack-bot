@@ -1,0 +1,17 @@
+{
+  "name": "p0-slack-bot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Slack bot that turns API debug requests into ready-to-run curl commands.",
+  "main": "src/app.js",
+  "scripts": {
+    "sync:apis": "node scripts/buildApiCatalog.js",
+    "start": "node src/app.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@slack/bolt": "^4.2.1",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {}
+}

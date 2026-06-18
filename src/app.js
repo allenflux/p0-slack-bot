@@ -6,7 +6,14 @@ const { App } = require("@slack/bolt");
 const { generateCurl, normalizeSlackText, parseRequest } = require("./curlGenerator");
 const { findBestRoute, findRouteByPath, listRoutes } = require("./apiCatalog");
 const { resolveImageFields } = require("./imageResolver");
-const { buildSummaryReply, canUseSummary, isSummaryRequest, SUMMARY_DENIED_REPLY } = require("./slackSummarizer");
+const {
+  buildOpinionReply,
+  buildSummaryReply,
+  canUseSummary,
+  isOpinionRequest,
+  isSummaryRequest,
+  SUMMARY_DENIED_REPLY
+} = require("./slackSummarizer");
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
@@ -101,7 +108,7 @@ async function buildReply(text) {
 
 app.event("app_mention", async ({ event, client, say }) => {
   console.log(`received app_mention from ${event.user} in ${event.channel}`);
-  if (isSummaryRequest(event.text)) {
+  if (isOpinionRequest(event.text) || isSummaryRequest(event.text)) {
     if (!canUseSummary(event.user)) {
       await say({
         text: SUMMARY_DENIED_REPLY,
@@ -111,7 +118,7 @@ app.event("app_mention", async ({ event, client, say }) => {
     }
 
     await say({
-      text: await buildSummaryReply({
+      text: await (isOpinionRequest(event.text) ? buildOpinionReply : buildSummaryReply)({
         client,
         channel: event.channel,
         threadTs: event.thread_ts,
@@ -138,7 +145,7 @@ app.event("message", async ({ event, client, say }) => {
   console.log(
     `received message from ${event.user} in ${event.channel} (${event.channel_type || "unknown"})`
   );
-  if (isSummaryRequest(event.text)) {
+  if (isOpinionRequest(event.text) || isSummaryRequest(event.text)) {
     if (!canUseSummary(event.user)) {
       await say({
         text: SUMMARY_DENIED_REPLY,
@@ -148,7 +155,7 @@ app.event("message", async ({ event, client, say }) => {
     }
 
     await say({
-      text: await buildSummaryReply({
+      text: await (isOpinionRequest(event.text) ? buildOpinionReply : buildSummaryReply)({
         client,
         channel: event.channel,
         threadTs: event.thread_ts,

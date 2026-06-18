@@ -3,9 +3,11 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 const {
+  buildOpinionReply,
   buildSummaryReply,
   canUseSummary,
   cleanSlackText,
+  isOpinionRequest,
   isSummaryRequest,
   parseAllowedSummaryUsers,
   parseSummaryOptions
@@ -15,6 +17,12 @@ test("summary requests are detected in Chinese and English", () => {
   assert.equal(isSummaryRequest("帮我总结一下最近聊天记录"), true);
   assert.equal(isSummaryRequest("please recap last 20 messages"), true);
   assert.equal(isSummaryRequest("生成一个 curl"), false);
+});
+
+test("opinion requests are detected in Chinese and English", () => {
+  assert.equal(isOpinionRequest("你怎么看这个讨论"), true);
+  assert.equal(isOpinionRequest("any advice on this thread?"), true);
+  assert.equal(isOpinionRequest("接口列表"), false);
 });
 
 test("summary options parse limit and lookback window", () => {
@@ -70,6 +78,47 @@ test("buildSummaryReply returns fallback summary without OpenAI key", async () =
 
   assert.match(reply, /Allen: 第一条/);
   assert.match(reply, /Mia: 第二条/);
+
+  if (originalKey) {
+    process.env.OPENAI_API_KEY = originalKey;
+  }
+});
+
+test("buildOpinionReply returns fallback advice without OpenAI key", async () => {
+  const originalKey = process.env.OPENAI_API_KEY;
+  delete process.env.OPENAI_API_KEY;
+
+  const client = {
+    conversations: {
+      replies: async () => ({
+        messages: [
+          { user: "U1", text: "这个方案风险有点高", ts: "1" },
+          { user: "U2", text: "可以先小流量试一下", ts: "2" }
+        ]
+      })
+    },
+    users: {
+      info: async ({ user }) => ({
+        user: {
+          name: user,
+          profile: {
+            display_name: user === "U1" ? "Allen" : "Mia"
+          }
+        }
+      })
+    }
+  };
+
+  const reply = await buildOpinionReply({
+    client,
+    channel: "C1",
+    threadTs: "1",
+    text: "你怎么看"
+  });
+
+  assert.match(reply, /我的初步判断/);
+  assert.match(reply, /建议/);
+  assert.match(reply, /Allen: 这个方案风险有点高/);
 
   if (originalKey) {
     process.env.OPENAI_API_KEY = originalKey;

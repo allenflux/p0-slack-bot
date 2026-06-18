@@ -8,6 +8,7 @@
 - 支持 `/p0curl` slash command
 - 可在普通消息里根据关键词自动回复
 - 可总结 Slack 群聊/私聊的最近聊天记录
+- 可在对话里询问 `你怎么看`，让 bot 总结上下文并给出建议
 - 覆盖 `/Users/allenflux/PyCharmProject/temp/backend/src/routers/workflow.py` 下扫描到的 FastAPI 路由
 - 根据 backend 的 method、path、Form/Query/Header 参数生成对应 curl
 - 自动把图片 URL/文件路径解析成 `download_url`，再按接口参数填入 curl
@@ -176,9 +177,11 @@ message.mpim
 @p0-curl-bot 总结最近 30 条
 @p0-curl-bot 总结最近 2 小时
 /p0summary 最近 50 条
+@p0-curl-bot 你怎么看
+@p0-curl-bot 这个方案你怎么看，给点建议
 ```
 
-群里只会在 `@mention` 或 `/p0summary` 时总结；私聊 bot 时可以直接发“总结最近聊天记录”。
+群里只会在 `@mention` 或 `/p0summary` 时总结；私聊 bot 时可以直接发“总结最近聊天记录”。`你怎么看` 会复用同一套 `SLACK_SUMMARY_ALLOWED_USERS` 权限限制。
 
 ## 使用示例
 

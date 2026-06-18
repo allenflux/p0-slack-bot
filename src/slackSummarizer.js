@@ -5,7 +5,8 @@ const MAX_LIMIT = Number(process.env.SLACK_SUMMARY_MAX_MESSAGES || 200);
 const DEFAULT_LOOKBACK_HOURS = Number(process.env.SLACK_SUMMARY_LOOKBACK_HOURS || 24);
 
 const SUMMARY_RE = /(总结|汇总|聊天记录|聊了什么|summary|summarize|recap)/i;
-const SUMMARY_DENIED_REPLY = "你没有权限使用聊天总结功能。";
+const OPINION_RE = /(你怎么看|怎么看|有啥建议|有什么建议|给.*建议|建议一下|opinion|thoughts|advice)/i;
+const SUMMARY_DENIED_REPLY = "你没有权限使用聊天总结/建议功能。";
 
 function clampNumber(value, min, max) {
   const number = Number(value);
@@ -15,6 +16,10 @@ function clampNumber(value, min, max) {
 
 function isSummaryRequest(text = "") {
   return SUMMARY_RE.test(text);
+}
+
+function isOpinionRequest(text = "") {
+  return OPINION_RE.test(text);
 }
 
 function parseAllowedSummaryUsers(value = process.env.SLACK_SUMMARY_ALLOWED_USERS || "") {
@@ -138,10 +143,42 @@ function buildFallbackSummary(lines, { lookbackHours }) {
   ].join("\n");
 }
 
-async function callOpenAISummary(lines, { lookbackHours }) {
+function buildFallbackOpinion(lines, { lookbackHours }) {
+  const preview = lines.slice(-12);
+
+  return [
+    `我看了最近 ${lookbackHours} 小时内的 ${lines.length} 条消息。`,
+    "",
+    "*我的初步判断*",
+    "- 当前没有可用的 OpenAI 额度或 key，所以我只能基于最近消息做粗略整理。",
+    "",
+    "*建议*",
+    preview.length
+      ? [
+          "- 先确认大家讨论里的核心分歧或待决点。",
+          "- 把下一步拆成明确 owner、截止时间和验收标准。",
+          "- 如果信息还不完整，先补齐关键上下文再推进。"
+        ].join("\n")
+      : "- 暂无可判断内容",
+    "",
+    "*最近上下文*",
+    preview.length ? preview.map((line) => `- ${line}`).join("\n") : "- 暂无"
+  ].join("\n");
+}
+
+async function callOpenAI(lines, { lookbackHours, mode }) {
   if (!process.env.OPENAI_API_KEY) return null;
 
   const model = process.env.OPENAI_SUMMARY_MODEL || "gpt-4o-mini";
+  const systemContent =
+    mode === "opinion"
+      ? "你是一个帮用户阅读 Slack 对话并给出判断和建议的助手。用中文输出，保持直接、克制、可执行。结构固定为：我的判断、建议、风险/注意点、下一步。没有内容的部分写“暂无”。不要编造对话里没有的信息。"
+      : "你是一个 Slack 聊天记录总结助手。用中文输出，简洁但保留具体信息。结构固定为：主要结论、讨论要点、决定、待办、风险/未解决问题。没有内容的部分写“暂无”。";
+  const userContent =
+    mode === "opinion"
+      ? [`请阅读下面最近 ${lookbackHours} 小时的 Slack 对话，先简要总结上下文，再给出你的判断和建议。`, "", lines.join("\n")].join("\n")
+      : [`请总结下面最近 ${lookbackHours} 小时的 Slack 聊天记录。`, "", lines.join("\n")].join("\n");
+
   const response = await fetch("https://api.openai.com/v1/responses", {
     method: "POST",
     headers: {
@@ -153,16 +190,11 @@ async function callOpenAISummary(lines, { lookbackHours }) {
       input: [
         {
           role: "system",
-          content:
-            "你是一个 Slack 聊天记录总结助手。用中文输出，简洁但保留具体信息。结构固定为：主要结论、讨论要点、决定、待办、风险/未解决问题。没有内容的部分写“暂无”。"
+          content: systemContent
         },
         {
           role: "user",
-          content: [
-            `请总结下面最近 ${lookbackHours} 小时的 Slack 聊天记录。`,
-            "",
-            lines.join("\n")
-          ].join("\n")
+          content: userContent
         }
       ]
     })
@@ -177,7 +209,7 @@ async function callOpenAISummary(lines, { lookbackHours }) {
   return data.output_text || data.output?.flatMap((item) => item.content || []).map((part) => part.text).join("\n");
 }
 
-async function buildSummaryReply({ client, channel, threadTs, text }) {
+async function getConversationLines({ client, channel, threadTs, text }) {
   const options = parseSummaryOptions(text);
   let messages = [];
 
@@ -198,13 +230,21 @@ async function buildSummaryReply({ client, channel, threadTs, text }) {
   }
 
   const lines = await formatMessagesForSummary(client, messages);
+  return { lines, options };
+}
+
+async function buildSummaryReply({ client, channel, threadTs, text }) {
+  const result = await getConversationLines({ client, channel, threadTs, text });
+  if (typeof result === "string") return result;
+
+  const { lines, options } = result;
 
   if (!lines.length) {
     return "我看了最近的聊天记录，但没有找到可总结的普通消息。";
   }
 
   try {
-    const aiSummary = await callOpenAISummary(lines, options);
+    const aiSummary = await callOpenAI(lines, { ...options, mode: "summary" });
     if (aiSummary) return aiSummary;
   } catch (error) {
     console.error(error.message);
@@ -213,12 +253,35 @@ async function buildSummaryReply({ client, channel, threadTs, text }) {
   return buildFallbackSummary(lines, options);
 }
 
+async function buildOpinionReply({ client, channel, threadTs, text }) {
+  const result = await getConversationLines({ client, channel, threadTs, text });
+  if (typeof result === "string") return result;
+
+  const { lines, options } = result;
+
+  if (!lines.length) {
+    return "我看了最近的聊天记录，但没有找到可判断的普通消息。";
+  }
+
+  try {
+    const opinion = await callOpenAI(lines, { ...options, mode: "opinion" });
+    if (opinion) return opinion;
+  } catch (error) {
+    console.error(error.message);
+  }
+
+  return buildFallbackOpinion(lines, options);
+}
+
 module.exports = {
+  buildFallbackOpinion,
   buildFallbackSummary,
+  buildOpinionReply,
   buildSummaryReply,
   canUseSummary,
   cleanSlackText,
   formatMessagesForSummary,
+  isOpinionRequest,
   isSummaryRequest,
   parseAllowedSummaryUsers,
   parseSummaryOptions,

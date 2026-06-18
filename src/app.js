@@ -6,6 +6,7 @@ const { App } = require("@slack/bolt");
 const { generateCurl, normalizeSlackText, parseRequest } = require("./curlGenerator");
 const { findBestRoute, findRouteByPath, listRoutes } = require("./apiCatalog");
 const { resolveImageFields } = require("./imageResolver");
+const { buildSummaryReply, isSummaryRequest } = require("./slackSummarizer");
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
@@ -98,15 +99,28 @@ async function buildReply(text) {
   ].join("\n");
 }
 
-app.event("app_mention", async ({ event, say }) => {
+app.event("app_mention", async ({ event, client, say }) => {
   console.log(`received app_mention from ${event.user} in ${event.channel}`);
+  if (isSummaryRequest(event.text)) {
+    await say({
+      text: await buildSummaryReply({
+        client,
+        channel: event.channel,
+        threadTs: event.thread_ts,
+        text: event.text
+      }),
+      thread_ts: event.thread_ts || event.ts
+    });
+    return;
+  }
+
   await say({
     text: await buildReply(event.text),
     thread_ts: event.thread_ts || event.ts
   });
 });
 
-app.event("message", async ({ event, say }) => {
+app.event("message", async ({ event, client, say }) => {
   console.log(
     `received raw message from ${event.user || "unknown"} in ${event.channel} (${event.channel_type || "unknown"})`
   );
@@ -116,6 +130,19 @@ app.event("message", async ({ event, say }) => {
   console.log(
     `received message from ${event.user} in ${event.channel} (${event.channel_type || "unknown"})`
   );
+  if (isSummaryRequest(event.text)) {
+    await say({
+      text: await buildSummaryReply({
+        client,
+        channel: event.channel,
+        threadTs: event.thread_ts,
+        text: event.text
+      }),
+      thread_ts: event.thread_ts || event.ts
+    });
+    return;
+  }
+
   await say({
     text: await buildReply(event.text),
     thread_ts: event.thread_ts || event.ts
@@ -128,6 +155,19 @@ app.command("/p0curl", async ({ command, ack, respond }) => {
   await respond({
     response_type: "in_channel",
     text: await buildReply(command.text)
+  });
+});
+
+app.command("/p0summary", async ({ command, ack, client, respond }) => {
+  console.log(`received /p0summary from ${command.user_id} in ${command.channel_id}`);
+  await ack();
+  await respond({
+    response_type: "in_channel",
+    text: await buildSummaryReply({
+      client,
+      channel: command.channel_id,
+      text: command.text || "总结最近聊天记录"
+    })
   });
 });
 

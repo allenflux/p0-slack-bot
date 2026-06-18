@@ -7,6 +7,7 @@
 - 被 `@mention` 时自动回复 `curl`
 - 支持 `/p0curl` slash command
 - 可在普通消息里根据关键词自动回复
+- 可总结 Slack 群聊/私聊的最近聊天记录
 - 覆盖 `/Users/allenflux/PyCharmProject/temp/backend/src/routers/workflow.py` 下扫描到的 FastAPI 路由
 - 根据 backend 的 method、path、Form/Query/Header 参数生成对应 curl
 - 自动把图片 URL/文件路径解析成 `download_url`，再按接口参数填入 curl
@@ -34,6 +35,18 @@ IMAGE_RESOLVE_API_URL=http://allenflux.tech:8000/api/image
 ```
 
 如果使用 Socket Mode，需要在 Slack App 后台打开 Socket Mode，并创建 app-level token。
+
+聊天总结功能可选配置：
+
+```sh
+OPENAI_API_KEY=sk-...
+OPENAI_SUMMARY_MODEL=gpt-4o-mini
+SLACK_SUMMARY_MESSAGE_LIMIT=50
+SLACK_SUMMARY_MAX_MESSAGES=200
+SLACK_SUMMARY_LOOKBACK_HOURS=24
+```
+
+没有 `OPENAI_API_KEY` 时，bot 仍会返回一份结构化的最近消息摘要；配置后会生成更像人工阅读后的“结论 / 要点 / 决定 / 待办 / 风险”总结。
 
 ## Docker Compose
 
@@ -134,6 +147,7 @@ channels:history
 groups:history
 im:history
 mpim:history
+users:read
 ```
 
 如果只想通过 `@mention` 和 `/p0curl` 使用，可以先不加各类 `*:history` 权限。
@@ -149,6 +163,19 @@ message.mpim
 ```
 
 如果只想私聊 bot，至少需要 `message.im` 和 `im:history`。
+
+## 聊天记录总结
+
+可用方式：
+
+```text
+@p0-curl-bot 总结最近聊天记录
+@p0-curl-bot 总结最近 30 条
+@p0-curl-bot 总结最近 2 小时
+/p0summary 最近 50 条
+```
+
+群里只会在 `@mention` 或 `/p0summary` 时总结；私聊 bot 时可以直接发“总结最近聊天记录”。
 
 ## 使用示例
 

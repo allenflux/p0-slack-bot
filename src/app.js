@@ -6,7 +6,7 @@ const { App } = require("@slack/bolt");
 const { generateCurl, normalizeSlackText, parseRequest } = require("./curlGenerator");
 const { findBestRoute, findRouteByPath, listRoutes } = require("./apiCatalog");
 const { resolveImageFields } = require("./imageResolver");
-const { buildSummaryReply, isSummaryRequest } = require("./slackSummarizer");
+const { buildSummaryReply, canUseSummary, isSummaryRequest, SUMMARY_DENIED_REPLY } = require("./slackSummarizer");
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
@@ -102,6 +102,14 @@ async function buildReply(text) {
 app.event("app_mention", async ({ event, client, say }) => {
   console.log(`received app_mention from ${event.user} in ${event.channel}`);
   if (isSummaryRequest(event.text)) {
+    if (!canUseSummary(event.user)) {
+      await say({
+        text: SUMMARY_DENIED_REPLY,
+        thread_ts: event.thread_ts || event.ts
+      });
+      return;
+    }
+
     await say({
       text: await buildSummaryReply({
         client,
@@ -131,6 +139,14 @@ app.event("message", async ({ event, client, say }) => {
     `received message from ${event.user} in ${event.channel} (${event.channel_type || "unknown"})`
   );
   if (isSummaryRequest(event.text)) {
+    if (!canUseSummary(event.user)) {
+      await say({
+        text: SUMMARY_DENIED_REPLY,
+        thread_ts: event.thread_ts || event.ts
+      });
+      return;
+    }
+
     await say({
       text: await buildSummaryReply({
         client,
@@ -161,6 +177,14 @@ app.command("/p0curl", async ({ command, ack, respond }) => {
 app.command("/p0summary", async ({ command, ack, client, respond }) => {
   console.log(`received /p0summary from ${command.user_id} in ${command.channel_id}`);
   await ack();
+  if (!canUseSummary(command.user_id)) {
+    await respond({
+      response_type: "ephemeral",
+      text: SUMMARY_DENIED_REPLY
+    });
+    return;
+  }
+
   await respond({
     response_type: "in_channel",
     text: await buildSummaryReply({

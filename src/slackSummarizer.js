@@ -5,6 +5,7 @@ const MAX_LIMIT = Number(process.env.SLACK_SUMMARY_MAX_MESSAGES || 200);
 const DEFAULT_LOOKBACK_HOURS = Number(process.env.SLACK_SUMMARY_LOOKBACK_HOURS || 24);
 
 const SUMMARY_RE = /(总结|汇总|聊天记录|聊了什么|summary|summarize|recap)/i;
+const SUMMARY_DENIED_REPLY = "你没有权限使用聊天总结功能。";
 
 function clampNumber(value, min, max) {
   const number = Number(value);
@@ -14,6 +15,20 @@ function clampNumber(value, min, max) {
 
 function isSummaryRequest(text = "") {
   return SUMMARY_RE.test(text);
+}
+
+function parseAllowedSummaryUsers(value = process.env.SLACK_SUMMARY_ALLOWED_USERS || "") {
+  return new Set(
+    String(value)
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean)
+  );
+}
+
+function canUseSummary(userId, allowedUsers = parseAllowedSummaryUsers()) {
+  if (!allowedUsers.size) return true;
+  return allowedUsers.has(userId);
 }
 
 function parseSummaryOptions(text = {}) {
@@ -201,8 +216,11 @@ async function buildSummaryReply({ client, channel, threadTs, text }) {
 module.exports = {
   buildFallbackSummary,
   buildSummaryReply,
+  canUseSummary,
   cleanSlackText,
   formatMessagesForSummary,
   isSummaryRequest,
-  parseSummaryOptions
+  parseAllowedSummaryUsers,
+  parseSummaryOptions,
+  SUMMARY_DENIED_REPLY
 };

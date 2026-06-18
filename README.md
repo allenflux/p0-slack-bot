@@ -41,12 +41,15 @@ IMAGE_RESOLVE_API_URL=http://allenflux.tech:8000/api/image
 ```sh
 OPENAI_API_KEY=sk-...
 OPENAI_SUMMARY_MODEL=gpt-4o-mini
+SLACK_SUMMARY_ALLOWED_USERS=U09KY29HKPD
 SLACK_SUMMARY_MESSAGE_LIMIT=50
 SLACK_SUMMARY_MAX_MESSAGES=200
 SLACK_SUMMARY_LOOKBACK_HOURS=24
 ```
 
 没有 `OPENAI_API_KEY` 时，bot 仍会返回一份结构化的最近消息摘要；配置后会生成更像人工阅读后的“结论 / 要点 / 决定 / 待办 / 风险”总结。
+
+`SLACK_SUMMARY_ALLOWED_USERS` 可限制谁能使用总结功能，多个 Slack user id 用英文逗号分隔。留空则不限制。
 
 ## Docker Compose
 

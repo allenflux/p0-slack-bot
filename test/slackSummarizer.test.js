@@ -4,8 +4,10 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const {
   buildSummaryReply,
+  canUseSummary,
   cleanSlackText,
   isSummaryRequest,
+  parseAllowedSummaryUsers,
   parseSummaryOptions
 } = require("../src/slackSummarizer");
 
@@ -25,6 +27,14 @@ test("summary options parse limit and lookback window", () => {
 
 test("slack text cleanup removes mentions and keeps link labels", () => {
   assert.equal(cleanSlackText("<@U123> 看这个 <https://example.com|链接> &amp; ok"), "看这个 链接 & ok");
+});
+
+test("summary user allowlist permits only configured users", () => {
+  const allowedUsers = parseAllowedSummaryUsers("U1, U2");
+
+  assert.equal(canUseSummary("U1", allowedUsers), true);
+  assert.equal(canUseSummary("U3", allowedUsers), false);
+  assert.equal(canUseSummary("U3", parseAllowedSummaryUsers("")), true);
 });
 
 test("buildSummaryReply returns fallback summary without OpenAI key", async () => {
